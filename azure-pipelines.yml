@@ -9,8 +9,8 @@ parameters:
     type: string
     default: int
     values:
-    - int
-    - prod
+    - INT
+    - PROD
   - name: projectName
     displayName: ProjectName
     type: string
@@ -18,18 +18,18 @@ parameters:
 
 
 trigger:
-  - {{ 'branch' }}
+  - {{ branch }}
 
 variables:
   - group: ${{parameters.variableGroup}}
 
-  ${{if eq(variables['Build.SourceBranchName'], 'int')}}:
-    variableGroup: IntGroup
-    Environment: Int
+  - ${{if eq(variables['Build.SourceBranchName'], 'int')}}:
+      variableGroup: IntGroup
+      Environment: INT
 
-  ${{if eq(variables['Build.SourceBranchName'], 'master')}}:
+  - ${{if eq(variables['Build.SourceBranchName'], 'master')}}:
       variableGroup: ProdGroup
-      Environment: Prod
+      Environment: PROD
 
 stages:
 - stage: Build
