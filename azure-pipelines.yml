@@ -15,6 +15,11 @@ parameters:
     displayName: ProjectName
     type: string
     default: tbv
+  - name: variableGroup
+    type: string
+    values:
+      - IntGroup
+      - ProdGroup
 
 
 trigger:
