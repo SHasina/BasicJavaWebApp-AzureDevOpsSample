@@ -20,10 +20,17 @@ parameters:
     values:
       - IntGroup
       - ProdGroup
+  - name: branch
+    type: string
+    values:
+      - int-branch
+      - prod-branch
 
 
 trigger:
-  - {{ 'branch' }}
+variables:
+  - name: ${{parameter.branch}}
+    
 
 
 stages:
