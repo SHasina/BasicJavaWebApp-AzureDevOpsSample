@@ -11,15 +11,12 @@ parameters:
     values:
     - INT
     - PROD
+
   - name: projectName
     displayName: ProjectName
     type: string
     default: tbv
-  - name: variableGroup
-    type: string
-    values:
-      - IntGroup
-      - ProdGroup
+
 
 trigger:
   branches: 
@@ -35,7 +32,7 @@ stages:
   - job: MavenPackageAndPublishArtifacts
     displayName: Maven Package and Publish Artifacts
     pool:
-      vmImage: $(vmImageName)
+      vmImage: 'ubuntu-latest'
 
     steps:
     - task: Maven@3
