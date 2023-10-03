@@ -7,7 +7,7 @@ parameters:
   - name: environment
     displayName: Environment
     type: string
-    default: int
+    default: INT
     values:
     - INT
     - PROD
@@ -23,18 +23,8 @@ parameters:
 
 
 trigger:
-  - {{ branch }}
+  - {{ 'branch' }}
 
-variables:
-  - group: ${{parameters.variableGroup}}
-
-  - ${{if eq(variables['Build.SourceBranchName'], 'int')}}:
-      variableGroup: IntGroup
-      Environment: INT
-
-  - ${{if eq(variables['Build.SourceBranchName'], 'master')}}:
-      variableGroup: ProdGroup
-      Environment: PROD
 
 stages:
 - stage: Build
@@ -65,6 +55,16 @@ stages:
   displayName: Deploy stage
   dependsOn: Build
   condition: succeeded()
+  variables:
+  - group: ${{parameters.variableGroup}}
+
+  - ${{if eq(variables['Build.SourceBranchName'], 'int')}}:
+      ${{parameters.variableGroup}}: IntGroup
+      ${{parameters.environment}}: INT
+
+  - ${{if eq(variables['Build.SourceBranchName'], 'master')}}:
+      ${{parameters.variableGroup}}: ProdGroup
+      ${{parameters.environment}}: PROD
   jobs:
   - deployment: DeployLinuxWebApp
     displayName: Deploy Linux Web App
