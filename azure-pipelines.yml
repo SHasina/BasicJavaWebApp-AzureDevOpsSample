@@ -61,12 +61,12 @@ stages:
   - group: ${{parameters.variableGroup}}
 
   - ${{if eq(variables['Build.SourceBranchName'], 'intbranch')}}:
-      ${{parameters.variableGroup}}: IntGroup
-      ${{parameters.environment}}: INT
+      - ${{parameters.variableGroup}}: IntGroup
+        ${{parameters.environment}}: INT
 
   - ${{if eq(variables['Build.SourceBranchName'], 'masterbranch')}}:
-      ${{parameters.variableGroup}}: ProdGroup
-      ${{parameters.environment}}: PROD
+      - ${{parameters.variableGroup}}: ProdGroup
+        ${{parameters.environment}}: PROD
   jobs:
   - deployment: DeployLinuxWebApp
     displayName: Deploy Linux Web App
