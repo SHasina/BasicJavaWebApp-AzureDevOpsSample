@@ -20,17 +20,12 @@ parameters:
     values:
       - IntGroup
       - ProdGroup
-  - name: branch
-    type: string
-    values:
-      - int-branch
-      - prod-branch
-
 
 trigger:
-variables:
-  - name: ${{parameter.branch}}
-    
+  branches: 
+    include:
+      - intbranch/*
+      - prodbranch/*  
 
 
 stages:
@@ -65,11 +60,11 @@ stages:
   variables:
   - group: ${{parameters.variableGroup}}
 
-  - ${{if eq(variables['Build.SourceBranchName'], 'int')}}:
+  - ${{if eq(variables['Build.SourceBranchName'], 'intbranch')}}:
       ${{parameters.variableGroup}}: IntGroup
       ${{parameters.environment}}: INT
 
-  - ${{if eq(variables['Build.SourceBranchName'], 'master')}}:
+  - ${{if eq(variables['Build.SourceBranchName'], 'masterbranch')}}:
       ${{parameters.variableGroup}}: ProdGroup
       ${{parameters.environment}}: PROD
   jobs:
