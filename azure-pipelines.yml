@@ -56,10 +56,10 @@ stages:
   condition: succeeded()
   
 variables:
-    ${{if eq(variables['Build.SourceBranchName'], 'intbranch')}}:
-      template: vars/int-variable.yaml
-    ${{else}}:
+    ${{if eq(variables['Build.SourceBranchName'], 'prodbranch')}}:
       template: vars/prod-ariable.yaml
+    ${{else}}:
+      template: vars/int-ariable.yaml
         
     jobs:
     - deployment: DeployLinuxWebApp
