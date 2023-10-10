@@ -62,21 +62,21 @@ variables:
       template: vars/int-ariable.yaml
         
     jobs:
-    - deployment: DeployLinuxWebApp
-      displayName: Deploy Linux Web App
-      environment: $(parameters.environment)
-      pool: 
-       vmImage: 'ubuntu-latest'
-      strategy:
-        runOnce:
-          deploy:
-            steps:
-            - task: AzureWebApp@1
-              displayName: 'Azure Web App Deploy: TB.Viewer'
-              inputs:
-                azureSubscription: ${{variables.azureSubscription}}
-                resourceGroupName: ${{variables.resourceGroup}}
-                location: ${{variables.location}}
-                appType: webAppLinux
-                appName: ${{variable.webappName}}
-                package: '$(Pipeline.Workspace)/drop/**/target/*.?(war|jar)'
+      - deployment: DeployLinuxWebApp
+        displayName: Deploy Linux Web App
+        environment: $(parameters.environment)
+        pool: 
+        vmImage: 'ubuntu-latest'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+              - task: AzureWebApp@1
+                displayName: 'Azure Web App Deploy: TB.Viewer'
+                inputs:
+                  azureSubscription: ${{variables.azureSubscription}}
+                  resourceGroupName: ${{variables.resourceGroup}}
+                  location: ${{variables.location}}
+                  appType: webAppLinux
+                  appName: ${{variable.webappName}}
+                  package: '$(Pipeline.Workspace)/drop/**/target/*.?(war|jar)'
