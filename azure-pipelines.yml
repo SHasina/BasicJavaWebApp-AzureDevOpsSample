@@ -54,6 +54,12 @@ stages:
   displayName: Deploy stage
   dependsOn: Build
   condition: succeeded()
+  variables:
+    ${{if eq(variables['Build.SourceBranchName'], 'prodbranch')}}:
+      template: vars/prod-ariable.yaml
+    ${{else}}:
+      template: vars/int-ariable.yaml
+
   jobs: 
     - deployment: DeployLinuxWebApp
       displayName: Deploy Linux Web App
