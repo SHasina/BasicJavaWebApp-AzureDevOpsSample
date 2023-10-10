@@ -62,6 +62,7 @@ variables:
       template: vars/int-ariable.yaml
         
     jobs:
+    
       - deployment: DeployLinuxWebApp
         displayName: Deploy Linux Web App
         environment: $(parameters.environment)
