@@ -59,7 +59,7 @@ stages:
       displayName: Deploy Linux Web App
       environment: $(parameters.environment)
       pool: 
-      vmImage: 'ubuntu-latest'
+       vmImage: 'ubuntu-latest'
       strategy:
         runOnce:
           deploy:
