@@ -60,9 +60,9 @@ variables:
       template: vars/prod-ariable.yaml
     ${{else}}:
       template: vars/int-ariable.yaml
-        
-    jobs:
-    
+    jobs:    
+    - job: MavenPackageAndPublishArtifacts
+
       - deployment: DeployLinuxWebApp
         displayName: Deploy Linux Web App
         environment: $(parameters.environment)
